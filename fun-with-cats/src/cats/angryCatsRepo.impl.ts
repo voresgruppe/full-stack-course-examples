@@ -1,5 +1,5 @@
-import { CATS_REPO, CatsRepository } from '../cats.repository';
-import { Cat } from './cat.entity';
+import { CATS_REPO, CatsRepository } from './cats.repository';
+import { Cat } from './entities/cat.entity';
 
 export class AngryCatsRepoImpl implements CatsRepository {
   create(name: string): Cat {
