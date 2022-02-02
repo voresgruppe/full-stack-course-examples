@@ -7,6 +7,6 @@ import { AngryCatsRepoImpl } from './angryCatsRepo.impl';
 
 @Module({
   controllers: [CatsController],
-  providers: [CatsService, { provide: CATS_REPO, useClass: AngryCatsRepoImpl }], //This is where you define your dependency
+  providers: [CatsService, { provide: CATS_REPO, useClass: AngryCatsRepoImpl }], //This is where you define your dependency, aka. associate a class with the CATS REPO token.
 })
 export class CatsModule {}

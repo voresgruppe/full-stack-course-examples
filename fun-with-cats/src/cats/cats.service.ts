@@ -5,6 +5,7 @@ import { CATS_REPO, CatsRepository } from './cats.repository';
 
 @Injectable()
 export class CatsService {
+  //Below the class that is associated with the CATS_REPO token is dependency injected into the catRepo (Notice that the type of the variable is the interface):
   constructor(@Inject(CATS_REPO) private readonly catRepo: CatsRepository) {}
 
   create(createCatDto: CreateCatDto) {
