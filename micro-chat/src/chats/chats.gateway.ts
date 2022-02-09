@@ -20,7 +20,6 @@ export class ChatsGateway {
   @SubscribeMessage('createChat')
   create(@MessageBody() createChatDto: CreateChatDto) {
     Console.debug('User: ' + createChatDto.user);
-    ifc;
     this.server.sockets.emit('newChat', createChatDto);
 
     return this.chatsService.create(createChatDto);
