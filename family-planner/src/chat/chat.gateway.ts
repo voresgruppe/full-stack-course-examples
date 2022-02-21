@@ -8,22 +8,26 @@ import {
 import { ChatService } from './chat.service';
 import { CreateChatDto } from './dto/create-chat.dto';
 import { UpdateChatDto } from './dto/update-chat.dto';
-import { Socket } from 'socket.io';
+import { Server, Socket } from 'socket.io';
 import { Chat } from './entities/chat.entity';
 
 @WebSocketGateway()
 export class ChatGateway {
   constructor(private readonly chatService: ChatService) {}
 
+  @WebSocketServer()
+  server: Server;
+
   @SubscribeMessage('createChat')
   create(
     @MessageBody() createChatDto: CreateChatDto,
     @ConnectedSocket() client: Socket,
   ) {
-    return this.chatService
-      .create(createChatDto)
-      .then((value) => client.emit(value.room, value))
-      .catch((reason) => client.to(client.id).emit('error', reason));
+    console.log(createChatDto);
+    const chat = this.chatService.create(createChatDto);
+    //this.server.emit(createChatDto.roomId, createChatDto); //Send to all, including initial sender
+    client.broadcast.emit(createChatDto.roomId, createChatDto); //Send to all, BUT the initial sender
+    return chat;
   }
 
   @SubscribeMessage('findAllChat')

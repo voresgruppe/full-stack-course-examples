@@ -9,5 +9,5 @@ export class CreateChatDto {
   text: string;
 
   @ApiProperty()
-  room: string;
+  roomId: string;
 }

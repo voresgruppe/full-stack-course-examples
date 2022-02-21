@@ -6,6 +6,7 @@ import {
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { Room } from '../../rooms/entities/room.entity';
 
 @Entity()
 export class Chat {
@@ -15,8 +16,8 @@ export class Chat {
   @ManyToOne(() => User, (user) => user.chats)
   user: User;
 
-  @Column()
-  room: string;
+  @ManyToOne(() => Room, (room) => room.chats)
+  room: Room;
 
   @Column()
   text: string;

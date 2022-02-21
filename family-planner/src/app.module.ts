@@ -4,6 +4,7 @@ import { CalendarEntriesModule } from './calendar-entries/calendarEntries.module
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ChatModule } from './chat/chat.module';
 import { Repository } from 'typeorm';
+import { RoomsModule } from './rooms/rooms.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { Repository } from 'typeorm';
       synchronize: true,
     }),
     ChatModule,
+    RoomsModule,
   ],
   controllers: [],
 })

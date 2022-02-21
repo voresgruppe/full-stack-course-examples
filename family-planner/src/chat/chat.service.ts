@@ -2,20 +2,35 @@ import { Injectable } from '@nestjs/common';
 import { CreateChatDto } from './dto/create-chat.dto';
 import { UpdateChatDto } from './dto/update-chat.dto';
 import { InjectRepository } from '@nestjs/typeorm';
-import { CalendarEntryEntity } from '../calendar-entries/infrastructure/persistence/calendarEntry.entity';
 import { Chat } from './entities/chat.entity';
 import { Repository } from 'typeorm';
-import { options } from 'tsconfig-paths/lib/options';
+import { User } from '../users/entities/user.entity';
+import { Room } from '../rooms/entities/room.entity';
 
 @Injectable()
 export class ChatService {
   constructor(
     @InjectRepository(Chat)
     private readonly chatRepository: Repository<Chat>,
+    @InjectRepository(Room)
+    private readonly roomRepository: Repository<Room>,
   ) {}
 
-  create(createChatDto: CreateChatDto): Promise<Chat> {
-    return this.chatRepository.save(createChatDto);
+  async create(createChatDto: CreateChatDto): Promise<Chat> {
+    let room = new Room();
+    room.id = createChatDto.roomId;
+    room.name = 'Tmp Room Name';
+    room.users = [];
+    room = await this.roomRepository.save(room);
+
+    const user = new User();
+    user.id = createChatDto.userId;
+
+    return this.chatRepository.save({
+      room: room,
+      user: user,
+      text: createChatDto.text,
+    });
   }
 
   findAll(): Promise<Chat[]> {
