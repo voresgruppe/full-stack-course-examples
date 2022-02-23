@@ -26,7 +26,8 @@ export class ChatGateway {
     console.log(createChatDto);
     const chat = this.chatService.create(createChatDto);
     //this.server.emit(createChatDto.roomId, createChatDto); //Send to all, including initial sender
-    client.broadcast.emit(createChatDto.roomId, createChatDto); //Send to all, BUT the initial sender
+    //client.broadcast.emit(createChatDto.roomId, createChatDto); //Send to all, BUT the initial sender
+    client.broadcast.emit('room', createChatDto); //Send to all, BUT the initial sender
     return chat;
   }
 
