@@ -4,8 +4,7 @@ import { User } from '../core/user';
 export class CreateUserInteractor {
   constructor(private readonly userRepository: UserRepository) {}
 
-  public createUser(name: string): Promise<User> {
-    console.log(this.userRepository);
-    return this.userRepository.createUser(name);
+  public createUser(name: string, email: string): Promise<User> {
+    return this.userRepository.createUser(name, email);
   }
 }

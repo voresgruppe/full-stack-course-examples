@@ -9,19 +9,17 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { inject, ref } from "vue";
 import { UserStore } from "@/stores/user";
+import type { UserService } from "@/services/user.service";
 
+const userService = inject<UserService>("UserService");
 const userStore = UserStore();
 const name = ref("");
 const email = ref("");
 
 function createUser() {
-  userStore.loggedInUser = {
-    uuid: "TMP_UUID",
-    name: name.value,
-    email: email.value,
-  };
+  userStore.create(name.value, email.value);
 }
 </script>
 

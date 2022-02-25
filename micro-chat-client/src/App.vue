@@ -1,5 +1,12 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from "vue-router";
+import { provide } from "vue";
+import { UserService } from "@/services/user.service";
+import { UserStore } from "@/stores/user";
+
+const userStore = UserStore();
+
+provide("UserService", new UserService());
 </script>
 
 <template>
@@ -8,6 +15,9 @@ import { RouterLink, RouterView } from "vue-router";
       <nav>
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/CreateUser">Create user</RouterLink>
+        <p>
+          {{ "Logged in as: " + userStore.userName }}
+        </p>
       </nav>
     </div>
   </header>
