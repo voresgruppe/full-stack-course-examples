@@ -15,6 +15,7 @@ provide("UserService", new UserService());
       <nav>
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/CreateUser">Create user</RouterLink>
+
         <p>
           {{ "Logged in as: " + userStore.userName }}
         </p>

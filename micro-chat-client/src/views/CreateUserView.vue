@@ -11,9 +11,7 @@
 <script setup lang="ts">
 import { inject, ref } from "vue";
 import { UserStore } from "@/stores/user";
-import type { UserService } from "@/services/user.service";
 
-const userService = inject<UserService>("UserService");
 const userStore = UserStore();
 const name = ref("");
 const email = ref("");
