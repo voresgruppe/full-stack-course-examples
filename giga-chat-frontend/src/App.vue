@@ -8,7 +8,8 @@ const userStore = UserStore();
 <template>
   <nav>
     <RouterLink to="/">Home</RouterLink> |
-    <RouterLink to="/createUser">Create User</RouterLink>
+    <RouterLink to="/createUser">Create User</RouterLink> |
+    <RouterLink to="/chat">Chat</RouterLink>
     <span v-if="userStore.userName.length > 0">
       | Logged in as: {{ userStore.userName }}</span
     >

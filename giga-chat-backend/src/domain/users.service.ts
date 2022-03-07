@@ -7,4 +7,8 @@ export class UsersService {
   create(name: string, email: string, password: string): Promise<User> {
     return this.userRepository.create(name, email, password);
   }
+
+  login(email: string, password: string) {
+    return this.userRepository.getUser(email, password);
+  }
 }

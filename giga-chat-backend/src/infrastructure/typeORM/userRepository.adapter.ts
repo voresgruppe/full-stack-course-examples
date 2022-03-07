@@ -15,4 +15,13 @@ export class UserRepositoryAdapter implements IUserRepository {
   create(name: string, email: string, password: string): Promise<User> {
     return this.userRepo.save({ name: name, email: email, password: password });
   }
+
+  getUser(email: string, password: string): Promise<User> {
+    return this.userRepo.findOne({
+      where: {
+        email: email,
+        password: password,
+      },
+    });
+  }
 }
