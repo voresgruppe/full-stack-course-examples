@@ -14,4 +14,14 @@ export class ChatService {
   createChat(chat: Chat) {
     this.socket.emit("createChat", chat);
   }
+
+  listenToRoom(room: string, chatListener: (chat: Chat) => void) {
+    this.socket.on(room, (chat: Chat) => {
+      chatListener(chat);
+    });
+  }
+
+  disconnectFromRoom(room: string) {
+    this.socket.off(room);
+  }
 }
