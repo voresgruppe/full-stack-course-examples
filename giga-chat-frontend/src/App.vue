@@ -9,7 +9,9 @@ const userStore = UserStore();
   <nav>
     <RouterLink to="/">Home</RouterLink> |
     <RouterLink to="/createUser">Create User</RouterLink> |
-    <RouterLink to="/chat">Chat</RouterLink>
+    <RouterLink to="/chat">Chat</RouterLink> |
+    <RouterLink to="/login">Login</RouterLink> |
+    <RouterLink to="/addFriend">Add friend</RouterLink>
     <span v-if="userStore.userName.length > 0">
       | Logged in as: {{ userStore.userName }}</span
     >

@@ -2,6 +2,8 @@ import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import CreateUser from "../views/CreateUser.vue";
 import ChatView from "../views/ChatView.vue";
+import LoginView from "../views/LoginView.vue";
+import AddFriendView from "../views/AddFriendView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -21,6 +23,12 @@ const router = createRouter({
       name: "CreateUser",
       component: CreateUser,
     },
+    {
+      path: "/login",
+      name: "LoginView",
+      component: LoginView,
+    },
+    { path: "/addFriend", name: "AddFriendView", component: AddFriendView },
   ],
 });
 

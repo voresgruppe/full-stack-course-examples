@@ -16,6 +16,14 @@ export class UserRepositoryAdapter implements IUserRepository {
     return this.userRepo.save({ name: name, email: email, password: password });
   }
 
+  emailIsNotInDatabase(email: string): boolean {
+    if (this.userRepo.findOne({ where: { email: email } })) {
+      throw new Error('user exists');
+      return false;
+    }
+    return true;
+  }
+
   getUser(email: string, password: string): Promise<User> {
     return this.userRepo.findOne({
       where: {
@@ -23,5 +31,25 @@ export class UserRepositoryAdapter implements IUserRepository {
         password: password,
       },
     });
+  }
+
+  findByEmail(email: string): Promise<User> {
+    return this.userRepo.findOne({
+      where: {
+        email: email,
+      },
+    });
+  }
+
+  findByName(name: string): Promise<User[]> {
+    return this.userRepo.find({
+      where: {
+        name: name,
+      },
+    });
+  }
+
+  findAll(): Promise<User[]> {
+    return this.userRepo.find();
   }
 }

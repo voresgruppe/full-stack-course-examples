@@ -8,7 +8,19 @@ export class UsersService {
     return this.userRepository.create(name, email, password);
   }
 
-  login(email: string, password: string) {
+  login(email: string, password: string): Promise<User> {
     return this.userRepository.getUser(email, password);
+  }
+
+  findOneByEmail(email: string): Promise<User> {
+    return this.userRepository.findByEmail(email);
+  }
+
+  findByName(name: string): Promise<User[]> {
+    return this.userRepository.findByName(name);
+  }
+
+  findAll(): Promise<User[]> {
+    return this.userRepository.findAll();
   }
 }
