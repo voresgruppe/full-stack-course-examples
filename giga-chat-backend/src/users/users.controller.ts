@@ -29,8 +29,8 @@ export class UsersController {
     return this.usersService.findOneByEmail(email);
   }
 
-  @Get('/name')
-  findByName(@Param('email') name: string): Promise<User[]> {
+  @Get(':name')
+  findByName(@Param('name') name: string): Promise<User[]> {
     return this.usersService.findByName(name);
   }
 

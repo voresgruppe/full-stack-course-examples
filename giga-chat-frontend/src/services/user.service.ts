@@ -19,13 +19,13 @@ export class UserService {
     return res.data;
   }
 
-  async searchEmail(email: string): Promise<User> {
-    const res = await http.get("/users/" + email);
+  async searchEmail(email: string): Promise<User[]> {
+    const res = await http.get<User[]>("/users/" + email);
     return res.data;
   }
 
   async searchName(name: string): Promise<User[]> {
-    const res = await http.get("/users/" + name);
+    const res = await http.get<User[]>("/users/" + name);
     return res.data;
   }
 

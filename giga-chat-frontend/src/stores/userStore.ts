@@ -9,6 +9,7 @@ export const UserStore = defineStore({
   id: "userStore",
   state: () => ({
     loggedInUser: { name: "" } as User,
+    searchUsers: [{ name: "bob", email: "" }] as User[],
     allUsers: [{ name: "bob", email: "" }] as User[],
   }),
   getters: {
@@ -19,10 +20,17 @@ export const UserStore = defineStore({
     usersAll: (state) => {
       if (state.allUsers != undefined) return state.allUsers;
       else {
-        const users: Array<User> = []
-        return users
+        const users: Array<User> = [];
+        return users;
       }
-    }
+    },
+    usersSearch: (state) => {
+      if (state.searchUsers != undefined) return state.searchUsers;
+      else {
+        const users: Array<User> = [];
+        return users;
+      }
+    },
   },
   actions: {
     createUser(name: string, email: string, password: string) {
@@ -41,10 +49,12 @@ export const UserStore = defineStore({
       userService.searchEmail(email).catch((err) => console.log(err));
     },
     searchName(name: string) {
-      userService.searchName(name).catch((err) => console.log(err));
+      userService
+        .searchName(name)
+        .then((users) => (this.searchUsers = users))
+        .catch((err) => console.log(err));
     },
-    getAll(){
-
+    getAll() {
       userService
         .getAll()
         .then((users) => (this.allUsers = users))
