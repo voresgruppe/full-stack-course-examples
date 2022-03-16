@@ -1,7 +1,4 @@
 <template>
-  <input v-model="inputSearchEmail" placeholder="Search for friends email" />
-  <br />
-  <br />
   <input v-model="inputSearchName" placeholder="Search for friends name" />
   <br />
   <br />
@@ -16,14 +13,13 @@
 
 <script setup lang="ts">
 import { UserStore } from "@/stores/userStore";
-import { onMounted, ref } from "vue";
+import { ref } from "vue";
 import type { User } from "@/models/User";
 
 const userStore = UserStore();
-const inputSearchEmail = ref("");
+//const inputSearchEmail = ref("");
 const inputSearchName = ref("");
 let usersList: Array<User> = [];
-let mount = false;
 
 function getUsersList() {
   if (inputSearchName.value.length > 0) {
