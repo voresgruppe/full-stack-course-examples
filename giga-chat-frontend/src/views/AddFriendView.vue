@@ -9,7 +9,9 @@
   <br />
   <br />
   <ul>
-    <li v-for="(user, index) in getAll" v-bind:key="index">{{ user.name }}</li>
+    <li v-for="user in getAll()" v-bind:key="user">
+      {{ user.name }}
+    </li>
   </ul>
 </template>
 

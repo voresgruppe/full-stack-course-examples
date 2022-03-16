@@ -9,17 +9,20 @@ export const UserStore = defineStore({
   id: "userStore",
   state: () => ({
     loggedInUser: { name: "" } as User,
-    allUsers: [] as User[],
+    allUsers: [{ name: "bob", email: "" }] as User[],
   }),
   getters: {
     userName: (state) => {
       if (state.loggedInUser.name != undefined) return state.loggedInUser.name;
       else return "";
     },
-    allUsers: (state) => {
-      if (state.allUsers != undefined) return state.allUsers as User[];
-      else return "";
-    },
+    usersAll: (state) => {
+      if (state.allUsers != undefined) return state.allUsers;
+      else {
+        const users: Array<User> = []
+        return users
+      }
+    }
   },
   actions: {
     createUser(name: string, email: string, password: string) {
@@ -40,7 +43,8 @@ export const UserStore = defineStore({
     searchName(name: string) {
       userService.searchName(name).catch((err) => console.log(err));
     },
-    getAll() {
+    getAll(){
+
       userService
         .getAll()
         .then((users) => (this.allUsers = users))
