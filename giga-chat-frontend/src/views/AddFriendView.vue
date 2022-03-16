@@ -9,13 +9,14 @@
   <br />
   <br />
   <ul>
-    <li v-for="user in users">{{ user.name }}</li>
+    <li v-for="(user, index) in getAll" v-bind:key="index">{{ user.name }}</li>
   </ul>
 </template>
 
 <script setup lang="ts">
 import { UserStore } from "@/stores/userStore";
 import { ref } from "vue";
+import type { User } from "@/models/User";
 
 const userStore = UserStore();
 const inputSearchEmail = ref("");
@@ -27,6 +28,11 @@ function handleEmailSearch() {
 
 function handleNameSearch() {
   userStore.searchName(inputSearchName.value);
+}
+
+function getAll(): User[] {
+  userStore.getAll();
+  return userStore.allUsers;
 }
 </script>
 

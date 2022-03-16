@@ -30,7 +30,7 @@ export class UserService {
   }
 
   async getAll(): Promise<User[]> {
-    const res = await http.get("/users/");
+    const res = await http.get<User[]>("/users/");
     return res.data;
   }
 }
