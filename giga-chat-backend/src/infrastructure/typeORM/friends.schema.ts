@@ -5,10 +5,10 @@ export const friendsSchema = new EntitySchema<Friend>({
   name: 'Friend',
   target: Friend,
   columns: {
-    user: {
+    user1: {
       type: 'varchar',
     },
-    friend: {
+    user2: {
       type: 'varchar',
     },
   },
