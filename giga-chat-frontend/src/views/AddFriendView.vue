@@ -53,7 +53,7 @@ function getAll() {
 }
 
 function addFriend(email: string) {
-  //todo
+  userStore.addFriend("asdf", "asdf")
 }
 </script>
 

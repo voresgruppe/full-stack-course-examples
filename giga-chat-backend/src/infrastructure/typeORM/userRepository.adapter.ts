@@ -19,7 +19,6 @@ export class UserRepositoryAdapter implements IUserRepository {
   emailIsNotInDatabase(email: string): boolean {
     if (this.userRepo.findOne({ where: { email: email } })) {
       throw new Error('user exists');
-      return false;
     }
     return true;
   }

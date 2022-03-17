@@ -3,11 +3,13 @@ import { UsersService } from '../domain/users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from '../core/user.entity';
 import { LoginUserDto } from './dto/login-user.dto';
+import { FriendService } from 'src/domain/friends.service';
 
 @Controller('users')
 export class UsersController {
   constructor(
     @Inject('UsersService') private readonly usersService: UsersService,
+    @Inject('FriendService') private readonly FriendService: FriendService
   ) {}
 
   @Post()
@@ -37,5 +39,10 @@ export class UsersController {
   @Get()
   findAll(): Promise<User[]> {
     return this.usersService.findAll();
+  }
+
+  @Post('/af')
+  addFriend(@Param('user1') user1: string, @Param('user2') user2: string){
+
   }
 }

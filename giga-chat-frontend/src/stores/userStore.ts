@@ -60,5 +60,11 @@ export const UserStore = defineStore({
         .then((users) => (this.allUsers = users))
         .catch((err) => console.log(err));
     },
+    addFriend(user1: string, user2: string) {
+      userService
+        .addFriend(user1, user2)
+        .then(user => (console.log(user)))
+        .catch((err)=>console.log(err))
+    }
   },
 });
