@@ -6,4 +6,8 @@ export interface IFriendRepository {
   findAllFriendsOf(user: string): Promise<Friend[]>;
 
   findAll(): Promise<Friend[]>;
+
+  acceptFriendRequest(friendContract: Friend): Promise<Friend>;
+
+  getFriendContractOfFriends(user1: string, user2: string): Promise<Friend>;
 }

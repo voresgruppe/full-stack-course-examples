@@ -13,7 +13,29 @@ export class FriendRepositoryAdapter implements IFriendRepository {
   }
 
   create(user1: string, user2: string): Promise<Friend> {
-    return this.FriendRepo.save({ user1: user1, user2: user2 });
+    return this.FriendRepo.save({
+      user1: user1,
+      user2: user2,
+      accepted: false,
+    });
+  }
+
+  getFriendContractOfFriends(user1: string, user2: string): Promise<Friend> {
+    return this.FriendRepo.findOne({
+      where: [
+        { user1: user1, user2: user2 },
+        { user1: user2, user2: user1 },
+      ],
+    });
+  }
+
+  acceptFriendRequest(friendContract: Friend): Promise<Friend> {
+    return this.FriendRepo.save({
+      id: friendContract.id,
+      user1: friendContract.user1,
+      user2: friendContract.user2,
+      accepted: true,
+    });
   }
 
   findAll(): Promise<Friend[]> {

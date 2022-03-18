@@ -5,12 +5,19 @@ export const FriendSchema = new EntitySchema<Friend>({
   name: 'Friend',
   target: Friend,
   columns: {
+    id: {
+      type: 'int',
+      generated: 'increment',
+      primary: true,
+    },
     user1: {
       type: 'varchar',
-      primary: true
     },
     user2: {
       type: 'varchar',
+    },
+    accepted: {
+      type: 'boolean',
     },
   },
   relations: {},

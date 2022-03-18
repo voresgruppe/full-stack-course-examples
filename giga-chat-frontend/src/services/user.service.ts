@@ -36,11 +36,11 @@ export class UserService {
 
   async addFriend(user1: string, user2: string): Promise<User> {
     console.log(`${user1} && ${user2}`);
-    
+
     const res = await http.post("/users/af", {
       user1: user1,
-      user2: user2
-    })
-    return res.data
+      user2: user2,
+    });
+    return res.data;
   }
 }
