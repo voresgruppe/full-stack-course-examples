@@ -19,8 +19,8 @@ export class UserService {
     return res.data;
   }
 
-  async searchEmail(email: string): Promise<User[]> {
-    const res = await http.get<User[]>("/users/" + email);
+  async searchEmail(email: string): Promise<User> {
+    const res = await http.get<User>("/users/email/" + email);
     return res.data;
   }
 
@@ -41,6 +41,11 @@ export class UserService {
       user1: user1,
       user2: user2,
     });
+    return res.data;
+  }
+
+  async getFriends(user: string): Promise<User[]> {
+    const res = await http.get<User[]>("/users/friends/" + user);
     return res.data;
   }
 }

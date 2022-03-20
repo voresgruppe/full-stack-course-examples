@@ -1,6 +1,6 @@
 import { IUserRepository } from '../../domain/borders/userRepository.interface';
 import { User } from '../../core/user.entity';
-import { EntityManager, Repository } from 'typeorm';
+import { EntityManager, Like, Repository } from 'typeorm';
 import { UserSchema } from './user.schema';
 import { Injectable } from '@nestjs/common';
 
@@ -40,11 +40,9 @@ export class UserRepositoryAdapter implements IUserRepository {
     });
   }
 
-  findByName(name: string): Promise<User[]> {
+  findByName(nameSearch: string): Promise<User[]> {
     return this.userRepo.find({
-      where: {
-        name: name,
-      },
+      name: Like(`%${nameSearch}%`),
     });
   }
 

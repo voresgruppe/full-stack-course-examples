@@ -8,13 +8,27 @@ const userService: UserService = new UserService();
 export const UserStore = defineStore({
   id: "userStore",
   state: () => ({
-    loggedInUser: { name: "" } as User,
-    searchUsers: [{ name: "bob", email: "" }] as User[],
-    allUsers: [{ name: "bob", email: "" }] as User[],
+    loggedInUser: { name: "", email: "" } as User,
+    searchUsers: [{ name: "", email: "" }] as User[],
+    allUsers: [{ name: "", email: "" }] as User[],
+    searchUserEmail: { name: "", email: "" } as User,
+    friends: [{ name: "", email: "" }] as User[],
   }),
   getters: {
+    friends: (state) => {
+      if (state.friends != undefined) return state.friends;
+      else {
+        const users: Array<User> = [];
+        return users;
+      }
+    },
     userName: (state) => {
       if (state.loggedInUser.name != undefined) return state.loggedInUser.name;
+      else return "";
+    },
+    loggedEmail: (state) => {
+      if (state.loggedInUser.email != undefined)
+        return state.loggedInUser.email;
       else return "";
     },
     usersAll: (state) => {
@@ -31,6 +45,10 @@ export const UserStore = defineStore({
         return users;
       }
     },
+    userSearchedByEmail: (state) => {
+      if (state.searchUserEmail != undefined) return state.searchUserEmail;
+      return { name: "", email: "" } as User;
+    },
   },
   actions: {
     createUser(name: string, email: string, password: string) {
@@ -46,7 +64,10 @@ export const UserStore = defineStore({
         .catch((err) => console.log(err));
     },
     searchEmail(email: string) {
-      userService.searchEmail(email).catch((err) => console.log(err));
+      userService
+        .searchEmail(email)
+        .then((user) => (this.searchUserEmail = user))
+        .catch((err) => console.log(err));
     },
     searchName(name: string) {
       userService
@@ -64,6 +85,12 @@ export const UserStore = defineStore({
       userService
         .addFriend(user1, user2)
         .then((user) => console.log(user))
+        .catch((err) => console.log(err));
+    },
+    getFriends() {
+      userService
+        .getFriends(this.loggedInUser.email)
+        .then((user) => (this.friends = user))
         .catch((err) => console.log(err));
     },
   },

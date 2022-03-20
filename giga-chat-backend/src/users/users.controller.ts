@@ -4,12 +4,13 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { User } from '../core/user.entity';
 import { LoginUserDto } from './dto/login-user.dto';
 import { FriendService } from 'src/domain/friends.service';
+import { Friend } from '../core/friend.entity';
 
 @Controller('users')
 export class UsersController {
   constructor(
     @Inject('UsersService') private readonly usersService: UsersService,
-    @Inject('FriendService') private readonly FriendService: FriendService
+    @Inject('FriendService') private readonly FriendService: FriendService,
   ) {}
 
   @Post()
@@ -26,7 +27,7 @@ export class UsersController {
     return this.usersService.login(loginUser.email, loginUser.password);
   }
 
-  @Get('/email')
+  @Get('/email/:email')
   findByEmail(@Param('email') email: string): Promise<User> {
     return this.usersService.findOneByEmail(email);
   }
@@ -42,7 +43,12 @@ export class UsersController {
   }
 
   @Post('/af')
-  addFriend(@Param('user1') user1: string, @Param('user2') user2: string){
+  addFriend(@Param('user1') user1: string, @Param('user2') user2: string) {
+    return this.FriendService.create(user1, user2);
+  }
 
+  @Get('/friends/:user')
+  findAllFriends(@Param('user') user: string): Promise<Friend[]> {
+    return this.FriendService.findAllFriendsOf(user);
   }
 }
